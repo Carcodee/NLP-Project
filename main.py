@@ -105,6 +105,6 @@ print("Cross-validation accuracy scores:", cv_scores)
 
 # Print the mean (average) accuracy across all 5 folds
 # This is our overall cross-validation accuracy metric
-print("Mean CV accuracy", cv_scores.mean())
+print(f"Mean CV accuracy: {cv_scores.mean():.4f}")
 
 print("---------------End 5-Fold Cross Validation---------------")
