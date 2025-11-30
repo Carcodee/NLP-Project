@@ -28,6 +28,8 @@ vectorizer = CountVectorizer()
 # [hello , how, are, you]
 # [1, 1, 1, 3]
 
+#tf(you) = 3/6 = 1/2
+#idf(you) = log(350/250)
 
 vectorized_matrix = vectorizer.fit_transform(df['CONTENT'])
 
@@ -51,9 +53,9 @@ y = df['CLASS'].values
 
 print("TFIDF table shape:",vectorized_matrix.shape)
 non_zero_cols = X[0].indices
-non_zero_cols_counts = X[0].data;
-non_zero_data = [(int(c), int(v)) for c, v in zip(non_zero_cols, non_zero_cols_counts)];
-print("Non zero (idx, counts):", non_zero_data)
+non_zero_cols_tfidf = X[0].data;
+non_zero_data = [(int(c), float(v)) for c, v in zip(non_zero_cols, non_zero_cols_tfidf)];
+print("Non zero (idx, tfidf):", non_zero_data)
 
 
 #features
