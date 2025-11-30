@@ -41,9 +41,7 @@ print("Non zero (idx, counts):", non_zero_data)
 print(vectorizer.get_feature_names_out())
 
 
-#[hello, huh, out, !, xxx, t h i s]
-#[0.8, 0.1, 0, 0, 0, 0.1]
-#[3, 2, 0, 0, 0, 1]
+#[hello, huh, out, !, xxx, ]
 
 print('---------------------------------------------')
 #it makes a sparse matrix where it stores all the tf-idf of each word 
@@ -63,11 +61,9 @@ print(vectorizer_tfidf.get_feature_names_out())
 
 #creates an array with all row indices from 0-350 in this case
 indices = np.arange(X.shape[0])
-#[0, 1, 2, 3, ... 350]
 rng = np.random.default_rng(seed=15)
 #randomize all the indices so if before was [0, 1, ..., 350] now is [3, 25, 8, ..., some index bewtween 0 and 350] so it becomes a random array of indices
 rng.shuffle(indices)
-#[3, 42, 4, 8, .... 39]
 
 #we create an array with remapped indices so now all rows are shuffled
 X_shuffled = X[indices]
@@ -87,7 +83,7 @@ model = MultinomialNB().fit(X=X_train, y=y_train)
 y_pred = model.predict(X=X_test)
 
 #some trivial predictions
-for truth, pred in zip(y_test[80:100], y_pred[80:100]):
+for truth, pred in zip(y_test[:10], y_pred[:10]):
     print(f"truth: {truth}, predicted: {pred}")
 
 #do here the rest of validations n fold, cross val, accuracy, etc
