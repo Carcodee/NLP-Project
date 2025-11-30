@@ -119,3 +119,36 @@ print("Cross-validation accuracy scores:", cv_scores)
 print(f"Mean CV accuracy: {cv_scores.mean():.4f}")
 
 print("---------------End 5-Fold Cross Validation---------------")
+
+# ==========NEW COMMENTS CLASSIFICATION==========
+print("\n---------------Classifying New Comments--------------")
+
+# 6 new comments (4 non-spam, 2 spam)
+new_comments = [
+    "I really enjoyed this movie, the story was great!",
+    "The film was enjoyable, I especially liked the soundtrack",
+    "This movie was better than I expected, very emotional.",
+    "Loved the cinematography, beautiful scenes!",
+    "The movie had a nice balance of drama and humor.",
+    "I enjoyed the plot, it was easy to follow and entertaining.",
+    "The performances felt genuine, especially in the emotional scenes.",
+    "I liked the ending, it wrapped up the story nicely.",
+    "Click here to win a free iPhone!!!",
+    "Subscribe to my channel and get free gifts now!",
+]
+
+# First: convert the comments into count vectors using SAME vectorizer
+new_count_vectors = vectorizer.transform(new_comments)
+
+# Then convert to TF-IDF using SAME transformer
+new_tfidf = vectorizer_tfidf.transform(new_count_vectors)
+
+# Predict using the trained model
+predictions = model.predict(new_tfidf)
+
+# Print the results clearly
+for comment, pred in zip(new_comments, predictions):
+    label = "SPAM" if pred == 1 else "NOT SPAM"
+    print(f"\nComment: {comment}\nPredicted class: {label}")
+
+print("---------------End New Comments Classification---------------")
