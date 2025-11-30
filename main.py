@@ -79,3 +79,32 @@ for truth, pred in zip(y_test[:10], y_pred[:10]):
 
 #do here the rest of validations n fold, cross val, accuracy, etc
 
+# ===== CROSS VALIDATION SECTION =====
+# Cross validation helps evaluate the model's performance more reliably
+# It divides the training data into k folds and trains/tests the model k times,
+# each time using a different fold as the test set and the remaining folds as training data.
+# This should gives us a estimate of the model's performance on unseen data.
+
+from sklearn.model_selection import cross_val_score
+
+print("---------------5-Fold Cross Validation---------------")
+
+# Initialize a fresh MultinomialNB model for cross-validation
+# We create a new instance rather than using the previously trained model
+cv_model = MultinomialNB()
+
+# Perform 5-fold cross-validation on the training data
+# cv=5: divides X_train into 5 folds
+# scoring='accuracy': evaluates using accuracy metric (correct predictions / total predictions)
+# cross_val_score automatically handles the train/test splits for each fold
+cv_scores = cross_val_score(cv_model, X_train, y_train, cv=5, scoring='accuracy')
+
+# Print the accuracy score for each individual fold
+# This shows how consistent the model performs across different data splits
+print("Cross-validation accuracy scores:", cv_scores)
+
+# Print the mean (average) accuracy across all 5 folds
+# This is our overall cross-validation accuracy metric
+print("Mean CV accuracy", cv_scores.mean())
+
+print("---------------End 5-Fold Cross Validation---------------")
