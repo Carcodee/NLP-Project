@@ -26,7 +26,7 @@ nltk.download('stopwords')
 vectorizer = CountVectorizer()
 # hello, how are you, you , you?
 # [hello , how, are, you]
-# [1, 1, 1, 3]
+# [tfidf, tfidf, tfidf, tfidf]
 
 #tf(you) = 3/6 = 1/2
 #idf(you) = log(350/250)
