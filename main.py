@@ -98,6 +98,7 @@ for truth, pred in zip(y_test[:10], y_pred[:10]):
 
 from sklearn.model_selection import cross_val_score
 
+print("")
 print("---------------5-Fold Cross Validation---------------")
 
 # Initialize a fresh MultinomialNB model for cross-validation
@@ -120,7 +121,29 @@ print(f"Mean CV accuracy: {cv_scores.mean():.4f}")
 
 print("---------------End 5-Fold Cross Validation---------------")
 
+# ===== CONFUSION MATRIX & ACCURACY =====
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+
+print("")
+print("\n---------------Model Evaluation on Test Set---------------")
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Accuracy
+acc = accuracy_score(y_test, y_pred)
+print(f"\nAccuracy: {acc:.4f}")
+
+# Classification Report (Precision, Recall, F1)
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred, target_names=["NOT SPAM", "SPAM"]))
+
+print("---------------End Model Evaluation---------------")
+
 # ==========NEW COMMENTS CLASSIFICATION==========
+print("")
 print("\n---------------Classifying New Comments--------------")
 
 # 6 new comments (4 non-spam, 2 spam)
@@ -152,23 +175,3 @@ for comment, pred in zip(new_comments, predictions):
     print(f"\nComment: {comment}\nPredicted class: {label}")
 
 print("---------------End New Comments Classification---------------")
-
-# ===== CONFUSION MATRIX & ACCURACY =====
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
-
-print("\n---------------Model Evaluation on Test Set---------------")
-
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix:")
-print(cm)
-
-# Accuracy
-acc = accuracy_score(y_test, y_pred)
-print(f"\nAccuracy: {acc:.4f}")
-
-# Classification Report (Precision, Recall, F1)
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred, target_names=["NOT SPAM", "SPAM"]))
-
-print("---------------End Model Evaluation---------------")
