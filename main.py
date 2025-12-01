@@ -152,3 +152,23 @@ for comment, pred in zip(new_comments, predictions):
     print(f"\nComment: {comment}\nPredicted class: {label}")
 
 print("---------------End New Comments Classification---------------")
+
+# ===== CONFUSION MATRIX & ACCURACY =====
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+
+print("\n---------------Model Evaluation on Test Set---------------")
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Accuracy
+acc = accuracy_score(y_test, y_pred)
+print(f"\nAccuracy: {acc:.4f}")
+
+# Classification Report (Precision, Recall, F1)
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred, target_names=["NOT SPAM", "SPAM"]))
+
+print("---------------End Model Evaluation---------------")
